@@ -317,6 +317,9 @@ __pycache__/
 # tools/**
 # !tools/packages.config
 
+#Sonarqube
+src/.sonarqube
+
 # Tabs Studio
 *.tss
 
