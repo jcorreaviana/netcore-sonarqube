@@ -1,0 +1,31 @@
+version: '2'
+services:
+  postgresql:
+    image: 'postgres'
+    ports:
+      - '5445:5432'
+    volumes:
+      - 'postgresql_data:/netcore_sonarqube'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+  sonarqube:
+    image: sonarqube
+    ports:
+      - '9999:9000'
+    environment:
+      - POSTGRESQL_HOST=postgresql
+      - POSTGRESQL_PORT=5445
+      - POSTGRESQL_ROOT_USER=postgres
+      - POSTGRESQL_CLIENT_CREATE_DATABASE_NAME=net_sonarqube
+      - POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME=n_sonarqube
+      - POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD=netcore_sonar
+      - SONARQUBE_DATABASE_NAME=net_sonarqube
+      - SONARQUBE_DATABASE_USER=n_sonarqube
+      - SONARQUBE_DATABASE_PASSWORD=netcore_sonar
+    volumes:
+      - sonarqube_data:/netcore_sonarqube
+volumes:
+  sonarqube_data:
+    driver: local
+  postgresql_data:
+    driver: local
